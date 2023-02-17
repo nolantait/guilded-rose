@@ -1,6 +1,8 @@
 Gilded Rose Kata
 ========================
 
+This is a modified version of [this repository.](https://github.com/clayhill/Gilded-Rose-Refactoring-Kata)
+
 The Gilded Rose Kata following the style from the [Sandi Metz](https://twitter.com/sandimetz)
 presentation [All the Little Things](https://www.youtube.com/watch?v=8bZh5LMaSmE).
 
