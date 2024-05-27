@@ -1,4 +1,9 @@
 class GildedRose
+  # This implementation is spaghetti code you're supposed to refactor.
+  #
+  # For a description see here:
+  # https://github.com/jimweirich/gilded_rose_kata#original-description-of-the-gilded-rose
+
   attr_reader :name, :days_remaining, :quality
 
   def initialize(name:, days_remaining:, quality:)
