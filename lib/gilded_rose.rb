@@ -14,23 +14,23 @@ class GildedRose
 
   def tick
     if @name != "Aged Brie" and @name != "Backstage passes to a TAFKAL80ETC concert"
-      if @quality > 0
+      if @quality > min_quality
         if @name != "Sulfuras, Hand of Ragnaros"
-          @quality = @quality - 1
+          decrease_quality
         end
       end
     else
-      if @quality < 50
-        @quality = @quality + 1
+      if @quality < max_quality
+        increase_quality
         if @name == "Backstage passes to a TAFKAL80ETC concert"
           if @days_remaining < 11
-            if @quality < 50
-              @quality = @quality + 1
+            if @quality < max_quality
+              increase_quality
             end
           end
           if @days_remaining < 6
-            if @quality < 50
-              @quality = @quality + 1
+            if @quality < max_quality
+              increase_quality
             end
           end
         end
@@ -42,19 +42,38 @@ class GildedRose
     if @days_remaining < 0
       if @name != "Aged Brie"
         if @name != "Backstage passes to a TAFKAL80ETC concert"
-          if @quality > 0
+          if @quality > min_quality
             if @name != "Sulfuras, Hand of Ragnaros"
-              @quality = @quality - 1
+              decrease_quality
             end
           end
         else
           @quality = @quality - @quality
         end
       else
-        if @quality < 50
-          @quality = @quality + 1
+        if @quality < max_quality
+          increase_quality
         end
       end
     end
   end
+
+  private
+
+  def max_quality
+    50
+  end
+
+  def min_quality
+    0
+  end
+
+  def increase_quality
+    @quality += 1
+  end
+
+  def decrease_quality
+    @quality -= 1
+  end
+
 end
