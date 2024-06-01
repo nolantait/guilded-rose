@@ -1,3 +1,33 @@
+class AgedBrie
+  attr_reader :name, :days_remaining, :quality
+
+  def initialize(name:, days_remaining:, quality:)
+    @name = name
+    @days_remaining = days_remaining
+    @quality = quality
+  end
+end
+
+class BackstagePass
+  attr_reader :name, :days_remaining, :quality
+
+  def initialize(name:, days_remaining:, quality:)
+    @name = name
+    @days_remaining = days_remaining
+    @quality = quality
+  end
+end
+
+class Sulfuras
+  attr_reader :name, :days_remaining, :quality
+
+  def initialize(name:, days_remaining:, quality:)
+    @name = name
+    @days_remaining = days_remaining
+    @quality = quality
+  end
+end
+
 class GildedRose
   # This implementation is spaghetti code you're supposed to refactor.
   #
@@ -7,17 +37,23 @@ class GildedRose
   attr_reader :name, :days_remaining, :quality
 
   def initialize(name:, days_remaining:, quality:)
+    case name
+    when "Aged Brie"
+      AgedBrie.new(name:, days_remaining:, quality:)
+    when "Backstage passes to a TAFKAL80ETC concert"
+      BackstagePass.new(name:, days_remaining:, quality:)
+    when "Sulfuras, Hand of Ragnaros"
+      Sulfuras.new(name:, days_remaining:, quality:)
+    end
     @name = name
     @days_remaining = days_remaining
     @quality = quality
   end
 
   def tick
-    if @name != "Aged Brie" and @name != "Backstage passes to a TAFKAL80ETC concert"
+    if @name != "Aged Brie" && @name != "Backstage passes to a TAFKAL80ETC concert"
       if @quality > min_quality
-        if @name != "Sulfuras, Hand of Ragnaros"
-          decrease_quality
-        end
+        decrease_quality if @name != "Sulfuras, Hand of Ragnaros"
       end
     else
       if @quality < max_quality
@@ -36,9 +72,11 @@ class GildedRose
         end
       end
     end
+
     if @name != "Sulfuras, Hand of Ragnaros"
       @days_remaining = @days_remaining - 1
     end
+
     if @days_remaining < 0
       if @name != "Aged Brie"
         if @name != "Backstage passes to a TAFKAL80ETC concert"
